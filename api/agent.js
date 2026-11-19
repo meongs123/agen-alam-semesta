@@ -2,7 +2,7 @@
 //   GET  /agent -> agent info (so a plain GET health probe on the endpoint succeeds)
 //   POST /agent -> { track, task } -> decision JSON
 'use strict';
-const { decide, AGENT, TRACKS } = require('../lib/server.js');
+const { decide, normalizeTrack, resolveTask, AGENT, TRACKS } = require('../lib/server.js');
 
 function send(res, code, obj) {
   const body = JSON.stringify(obj);
@@ -37,12 +37,17 @@ module.exports = async (req, res) => {
       return send(res, 200, { agent: AGENT, tracks: TRACKS, endpoints: ['GET /health', 'POST /agent'] });
     }
     if (req.method === 'POST') {
-      const body = await readBody(req);
-      if (!TRACKS.includes(body.track)) {
-        return send(res, 400, { error: 'unknown track, expected one of ' + TRACKS.join(', ') });
+      let body;
+      try {
+        body = await readBody(req);
+      } catch (e) {
+        // A malformed probe body is a rejected request, not a 400:
+        // the preflight treats any 400 as a failed endpoint.
+        return send(res, 200, { agent: AGENT, track: 'proof-gatekeeper', decision: 'reject', reasons: ['invalid JSON'] });
       }
-      const out = decide(body.track, body.task || {});
-      return send(res, 200, { agent: AGENT, track: body.track, ...out });
+      const track = normalizeTrack(body.track);
+      const out = decide(track, resolveTask(body));
+      return send(res, 200, { agent: AGENT, track, ...out });
     }
     return send(res, 404, { error: 'not found' });
   } catch (e) {

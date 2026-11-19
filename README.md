@@ -29,7 +29,10 @@ node --test test.js     # 5 tests
 - `GET /health` → `{ status: "ok", agent, tracks }`
 - `POST /agent` with `{ "track": "proof-gatekeeper" | "steal-the-vfy", "task": {...} }`
   → decision JSON (`approve`/`reject` with reasons, or a `cooperate`/`defect`
-  move with the policy commitment).
+  move with the policy commitment). The endpoint is preflight-tolerant: a
+  missing track defaults to `proof-gatekeeper`, display names
+  (`"Proof Gatekeeper"`) are accepted, and a bare task without the wrapper
+  still decides — it never answers 400 to a probe.
 
 ## Deploy
 
