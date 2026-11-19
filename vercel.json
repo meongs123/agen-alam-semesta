@@ -1,0 +1,1 @@
+{"rewrites":[{"destination":"/api/index","source":"/health"},{"destination":"/api/index","source":"/agent"},{"destination":"/api/index","source":"/"}]}
