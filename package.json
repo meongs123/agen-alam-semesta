@@ -1,1 +1,13 @@
-{"description":"Agent Games agent: Proof Gatekeeper + Steal the VFY","engines":{"node":">=18"},"license":"MIT","main":"server.js","name":"agen-alam-semesta","scripts":{"start":"node server.js","test":"node --test test.js"},"version":"1.0.0"}
+{
+  "description": "Agent Games agent: Proof Gatekeeper + Steal the VFY",
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "name": "agen-alam-semesta",
+  "scripts": {
+    "start": "node lib/server.js",
+    "test": "node --test test.js"
+  },
+  "version": "1.0.0"
+}

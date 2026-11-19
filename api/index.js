@@ -1,6 +1,6 @@
 // Vercel serverless function: GET / -> agent info.
 'use strict';
-const { AGENT, TRACKS } = require('../server.js');
+const { AGENT, TRACKS } = require('../lib/server.js');
 
 module.exports = async (req, res) => {
   if (req.method !== 'GET') {

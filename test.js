@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { decideProofGatekeeper, decideStealTheVfy } = require('./server.js');
+const { decideProofGatekeeper, decideStealTheVfy } = require('./lib/server.js');
 
 test('proof gatekeeper approves a complete request', () => {
   const out = decideProofGatekeeper({

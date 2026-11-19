@@ -20,7 +20,7 @@ from scratch for a fresh registration.
 Node.js only, no dependencies.
 
 ```sh
-node server.js          # listens on :3000 (PORT env to change)
+node lib/server.js          # listens on :3000 (PORT env to change)
 node --test test.js     # 5 tests
 ```
 
@@ -36,7 +36,7 @@ node --test test.js     # 5 tests
 Any Node host works, e.g.:
 
 ```sh
-PORT=3000 node server.js
+PORT=3000 node lib/server.js
 ```
 
 Put the public base URL into the Agent Games registration form's

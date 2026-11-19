@@ -2,7 +2,7 @@
 //   GET  /agent -> agent info (so a plain GET health probe on the endpoint succeeds)
 //   POST /agent -> { track, task } -> decision JSON
 'use strict';
-const { decide, AGENT, TRACKS } = require('../server.js');
+const { decide, AGENT, TRACKS } = require('../lib/server.js');
 
 function send(res, code, obj) {
   const body = JSON.stringify(obj);
